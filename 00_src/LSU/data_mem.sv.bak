@@ -1,0 +1,56 @@
+module data\_memory ( input  logic        i\_clk, input  logic \[13:0\] i\_addr,      // 16KB = 14-bit byte address input  logic \[31:0\] i\_st\_data, input  logic        i\_write\_enable, input  logic \[2:0\]  i\_ctrl,      // funct3 output logic \[31:0\] o\_memory\_data );
+
+```
+localparam SIZE = 100;         // 2 KB - 2048  
+logic \[7:0\] memory\_reg \[SIZE-1:0\];  
+  
+// Initialize down to 0  
+initial begin  
+    for (int i = 0; i \< SIZE; i++) begin  
+        memory\_reg\[i\] = 8'h00;  
+    end  
+end
+```
+
+/\* // Caculate aligned for address logic \[13:0\] aligned\_addr; always\_comb begin case (i\_ctrl\[1:0\]) 2'b00: aligned\_addr = i\_addr;                    // Byte  - SB, LB, LBU 2'b01: aligned\_addr = \{i\_addr\[13:1\], 1'b0\};      // Half  - SH, LH, LHU 2'b10: aligned\_addr = \{i\_addr\[13:2\], 2'b00\};     // Word  - SW, LW default: aligned\_addr = i\_addr; endcase end \*/ // Write logic always\_ff @(posedge i\_clk) begin if (i\_write\_enable) begin case (i\_ctrl\[1:0\]) 2'b00: // SB memory\_reg\[i\_addr\] \<= i\_st\_data\[7:0\];
+
+```
+            2'b01: begin // SH  
+                memory\_reg\[i\_addr\]   \<= i\_st\_data\[7:0\];  
+                memory\_reg\[i\_addr+1\] \<= i\_st\_data\[15:8\];  
+            end  
+  
+            2'b10: begin // SW  
+                memory\_reg\[i\_addr\]   \<= i\_st\_data\[7:0\];  
+                memory\_reg\[i\_addr+1\] \<= i\_st\_data\[15:8\];  
+                memory\_reg\[i\_addr+2\] \<= i\_st\_data\[23:16\];  
+                memory\_reg\[i\_addr+3\] \<= i\_st\_data\[31:24\];  
+            end  
+        endcase  
+    end  
+end  
+  
+// Read logic  
+logic \[31:0\] raw\_read\_data;  
+always\_comb begin  
+    raw\_read\_data\[7:0\]   = memory\_reg\[i\_addr\];  
+    raw\_read\_data\[15:8\]  = memory\_reg\[i\_addr + 1\];  
+    raw\_read\_data\[23:16\] = memory\_reg\[i\_addr + 2\];  
+    raw\_read\_data\[31:24\] = memory\_reg\[i\_addr + 3\];  
+end  
+  
+// Format output theo funct3  
+always\_comb begin  
+    case (i\_ctrl)  
+        3'b000: o\_memory\_data = \{\{24\{raw\_read\_data\[7\]\}\},  raw\_read\_data\[7:0\]\};   // LB  
+        3'b001: o\_memory\_data = \{\{16\{raw\_read\_data\[15\]\}\}, raw\_read\_data\[15:0\]\};  // LH  
+        3'b010: o\_memory\_data = raw\_read\_data;                                   // LW  
+        3'b100: o\_memory\_data = \{24'h0, raw\_read\_data\[7:0\]\};                     // LBU  
+        3'b101: o\_memory\_data = \{16'h0, raw\_read\_data\[15:0\]\};                    // LHU  
+        default: o\_memory\_data = 32'h0;  
+    endcase  
+end
+```
+
+endmodule
+

@@ -1,0 +1,132 @@
+xrun(64): 20.09-s001: (c) Copyright 1995-2020 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	20.09-s001: Started on Apr 19, 2026 at 03:03:25 EDT
+xrun
+	-access +rwc
+	-f ./flist
+		../01_bench/tbench.sv
+		../01_bench/driver.sv
+		../01_bench/scoreboard.sv
+		../01_bench/tlib.svh
+		../00_src/singlecycle.sv
+		../00_src/imem.sv
+		../00_src/ctrl_unit.sv
+		../00_src/regfile.sv
+		../00_src/ImmGen.sv
+		../00_src/brc.sv
+		../00_src/pc.sv
+		../00_src/pc_plus4.sv
+		../00_src/mux_2to1.sv
+		../00_src/mux_4to1.sv
+		../00_src/ALU/alu.sv
+		../00_src/ALU/adder.sv
+		../00_src/ALU/subtractor.sv
+		../00_src/ALU/full_adder.sv
+		../00_src/ALU/and_32bit.sv
+		../00_src/ALU/or_32bit.sv
+		../00_src/ALU/xor_32bit.sv
+		../00_src/ALU/sll.sv
+		../00_src/ALU/srl.sv
+		../00_src/ALU/sra.sv
+		../00_src/ALU/slt.sv
+		../00_src/ALU/sltu.sv
+		../00_src/LSU/lsu.sv
+		../00_src/LSU/data_mem.sv
+		../00_src/LSU/input_buffer.sv
+		../00_src/LSU/output_buffer.sv
+Recompiling... reason: file '../00_src/imem.sv' is newer than expected.
+	expected: Thu Apr 16 05:14:42 2026
+	actual:   Sun Apr 19 03:03:21 2026
+file: ../00_src/imem.sv
+	module worklib.imem:sv
+		errors: 0, warnings: 0
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+	Top level design units:
+		$unit_0x2431d956
+		tbench
+xmelab: *W,DSEMEL: This SystemVerilog design will be simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+        .i_addr    (i_lsu_addr[15:12]),
+                             |
+xmelab: *W,CUVMPW (../00_src/LSU/lsu.sv,46|29): port sizes differ in port connection(4/16) for the instance(tbench.dut.LOAD_STORE_UNIT) .
+        .i_addr     (i_lsu_addr[15:12]),
+                              |
+xmelab: *W,CUVMPW (../00_src/LSU/lsu.sv,56|30): port sizes differ in port connection(4/16) for the instance(tbench.dut.LOAD_STORE_UNIT) .
+        .i_addr         (i_lsu_addr[11:0]),      // 2KB
+                                  |
+xmelab: *W,CUVMPW (../00_src/LSU/lsu.sv,70|34): port sizes differ in port connection(12/14) for the instance(tbench.dut.LOAD_STORE_UNIT) .
+	Building instance overlay tables: .
+        $readmemh("../02_test/dump/isa_4b.hex", memory);  
+                                                     |
+xmelab: *W,MEMODR (../00_src/imem.sv,9|53): $readmem default memory order incompatible with IEEE1364.
+................... Done
+	Generating native compiled code:
+		worklib.imem:sv <0x46b4ffe4>
+			streams:   2, words:   721
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		               Instances  Unique
+		Modules:             163      29
+		Registers:           114     114
+		Scalar wires:        292       -
+		Expanded wires:      160       5
+		Vectored wires:      130       -
+		Always blocks:        27      27
+		Initial blocks:        8       8
+		Cont. assignments:    25      33
+		Pseudo assignments:   65      65
+		Compilation units:     1       1
+	Writing initial simulation snapshot: worklib.tbench:sv
+Loading snapshot worklib.tbench:sv .................... Done
+xmsim: *W,DSEM2009: This SystemVerilog design is simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
+xcelium> source /opt/cadence/XCELIUM2009/tools/xcelium/files/xmsimrc
+xcelium> run
+
+SINGLE CYCLE - ISA test
+
+add......PASS
+addi.....PASS
+sub......PASS
+and......PASS
+andi.....PASS
+or.......PASS
+ori......PASS
+xor......PASS
+xori.....PASS
+slt......PASS
+slti.....PASS
+sltu.....PASS
+sltiu....PASS
+sll......PASS
+slli.....PASS
+srl......PASS
+srli.....PASS
+sra......PASS
+srai.....PASS
+lw.......PASS
+lh.......PASS
+lhu......PASS
+lb.......PASS
+lbu......PASS
+sw.......PASS
+sh.......PASS
+sb.......PASS
+auipc....PASS
+lui......PASS
+beq......PASS
+bne......PASS
+blt......PASS
+bltu.....PASS
+bge......PASS
+bgeu.....PASS
+jal......PASS
+jalr.....PASS
+malgn....PASS
+iosw.....PASS
+
+END of ISA test
+
+Simulation complete via $finish(1) at time 19402 NS + 1
+../01_bench/scoreboard.sv:33       $finish;
+xcelium> exit
+TOOL:	xrun(64)	20.09-s001: Exiting on Apr 19, 2026 at 03:03:25 EDT  (total: 00:00:00)
