@@ -1,0 +1,59 @@
+\documentclass[10pt]{beamer}
+\usetheme{Madrid} % Bạn có thể đổi sang theme khác như Warsaw, Frankfurt...
+\usecolortheme{default}
+
+% ----- ENCODING & LANGUAGE -----
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[english,vietnamese]{babel}
+
+% ----- GRAPHICS & CODE -----
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% ---- Tái sử dụng màu và style từ mystyle.sty ----
+\definecolor{keywordcolor}{rgb}{0.1,0.1,0.6}
+\definecolor{commentcolor}{rgb}{0.0,0.5,0.0}
+\definecolor{stringcolor}{rgb}{0.58,0,0.82}
+\definecolor{bgcolor}{rgb}{0.95,0.95,0.95}
+
+\lstdefinestyle{verilog-style}{
+	language=Verilog,
+	backgroundcolor=\color{bgcolor},
+	keywordstyle=\color{keywordcolor}\bfseries,
+	commentstyle=\color{commentcolor}\itshape,
+	stringstyle=\color{stringcolor},
+	basicstyle=\ttfamily\scriptsize, % Chỉnh font nhỏ lại cho vừa slide
+	numbers=left,
+	numberstyle=\tiny,
+	stepnumber=1,
+	numbersep=5pt,
+	tabsize=2,
+	showstringspaces=false,
+	breaklines=true,
+	frame=single
+}
+
+% ----- THÔNG TIN TRANG BÌA -----
+\title[RISC-V Single-Cycle]{Design and Implementation of a \\ 32-bit Single-Cycle RISC-V Processor}
+\author{NGUYEN DUY TUYEN}
+\institute{GROUP 5}
+\date{\today}
+
+\begin{document}
+	
+	% Slide tiêu đề
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	% Slide mục lục
+	\begin{frame}{Nội dung trình bày}
+		\tableofcontents
+	\end{frame}
+	
+	% Nạp nội dung slide
+	\input{description_slide.tex}
+	
+\end{document}

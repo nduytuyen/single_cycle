@@ -1,0 +1,11 @@
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
+\contentsline {section}{\numberline {2}RTL Design Specification}{1}{section.2}%
+\contentsline {subsection}{\numberline {2.1}FSM Archcitecture}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}State Machine Diagram}{3}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Verification Architecture}{5}{section.3}%
+\contentsline {section}{\numberline {4}Test Scenarios \& Simulation Results}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Directed Test}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Constrained Random Test}{8}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Conclusion}{10}{section.5}%

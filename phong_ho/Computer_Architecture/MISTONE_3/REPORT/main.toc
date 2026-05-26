@@ -1,0 +1,19 @@
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
+\contentsline {section}{\numberline {2}System Architecture and Pipeline Stages}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Instruction Fetch (IF)}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Instruction Decode (ID)}{2}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Execute (EX)}{2}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Memory Access (MEM)}{2}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Write-back (WB)}{2}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Memory Mapping and I/O System}{3}{section.3}%
+\contentsline {section}{\numberline {4}Hardware Applications on DE-2 Board}{4}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Application 1: Real-time Digital Stopwatch}{4}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Application 2: Hexadecimal to Decimal Converter}{4}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Application 3: Advanced LCD User Interface}{4}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Performance Analysis and Results}{5}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Benchmarking}{5}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Pipeline Performance Comparison}{5}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Synthesis Results}{5}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Conclusion}{6}{section.6}%

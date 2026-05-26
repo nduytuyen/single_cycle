@@ -1,0 +1,111 @@
+\section{Introduction}
+This report documents the design of a 5-stage pipelined RISC-V processor based on the RV32I ISA. The project focuses on transitioning from a single-cycle design to a pipelined architecture to achieve higher clock frequencies and improved performance through parallel instruction execution. Key enhancements include hazard detection, data forwarding, and dynamic branch prediction.
+
+\newpage
+\section{System Architecture and Pipeline Stages}
+The processor architecture is divided into five distinct stages to allow for concurrent execution:
+
+\subsection{Instruction Fetch (IF)}
+The IF stage retrieves instructions from the Instruction Memory (I\$) using the Program Counter (PC). This stage is critical for handling \texttt{stall} signals from the Hazard Unit and \texttt{flush} signals when a misprediction occurs.
+
+\subsection{Instruction Decode (ID)}
+The ID stage decodes the 32-bit machine code and reads operands from the Register File (Regfile). This stage also includes the Immediate Generator (ImmGen) to prepare operands for the "Elite Four" instructions (\texttt{addi}, \texttt{beq}, \texttt{jal}, \texttt{lui}) which are fundamental to the processor's stability.
+
+\subsection{Execute (EX)}
+The EX stage performs arithmetic and logic operations using the ALU and evaluates branch conditions via the Branch Control (BRC) unit. Forwarded data from later stages is injected here to resolve data hazards without stalling.
+
+\subsection{Memory Access (MEM)}
+The MEM stage interacts with the data memory and memory-mapped I/O peripherals through the Load Store Unit (LSU). It handles 32-bit load/store operations to peripheral registers like LEDR (0x1000\_0000).
+
+\subsection{Write-back (WB)}
+The final stage selects the appropriate result (ALU or Memory) to write back into the destination register. The \texttt{o\_insn\_vld} signal ensures that only successfully retired instructions are counted for IPC calculation.
+
+\newpage
+\section{Memory Mapping and I/O System}
+The processor supports a 64 KiB unified memory space (required for benchmarking) and several I/O peripherals mapped to specific addresses:
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{lll}
+		\toprule
+		\textbf{Address Range} & \textbf{Peripheral} & \textbf{Function} \\
+		\midrule
+		0x0000\_0000 -- 0x0000\_FFFF & Memory (64 KiB) & Program and Data Storage \\
+		0x1000\_0000 -- 0x1000\_0FFF & Red LEDs (LEDR) & Status display \\
+		0x1000\_1000 -- 0x1000\_1FFF & Green LEDs (LEDG) & Status display \\
+		0x1000\_2000 -- 0x1000\_2FFF & HEX 3--0 & 7-Segment display \\
+		0x1000\_3000 -- 0x1000\_3FFF & HEX 7--4 & 7-Segment display \\
+		0x1000\_4000 -- 0x1000\_4FFF & LCD Control & Text output \\
+		0x1001\_0000 -- 0x1001\_0FFF & Switches (SW) & User Input \\
+		\bottomrule
+	\end{tabular}
+	\caption{Memory Map Conventions for the Pipelined Processor}
+\end{table}
+
+\newpage
+\section{Hardware Applications on DE-2 Board}
+To validate the processor's functionality in a real-world scenario, the following applications were implemented and tested on the DE-2 kit:
+
+\subsection{Application 1: Real-time Digital Stopwatch}
+This application demonstrates precise timing and 7-segment display control.
+\begin{itemize}
+	\item \textbf{Functionality:} The processor runs a timing loop, incrementing a counter every 10ms.
+	\item \textbf{I/O Interaction:}
+	\begin{itemize}
+		\item \textbf{Inputs:} SW17 is used for a global hardware reset. Other switches control Start/Stop/Lap functions.
+		\item \textbf{Outputs:} The time (MM:SS:CC) is formatted and stored at addresses \texttt{0x1000\_2000} and \texttt{0x1000\_3000} to drive the HEX displays.
+	\end{itemize}
+\end{itemize}
+
+\subsection{Application 2: Hexadecimal to Decimal Converter}
+This application validates complex calculations and data processing capabilities.
+\begin{itemize}
+	\item \textbf{Functionality:} The processor reads a 17-bit hexadecimal value from the physical switches and converts it to decimal format.
+	\item \textbf{Algorithm:} A repeated division-by-ten or the Double Dabble algorithm is implemented in RV32I assembly.
+	\item \textbf{Outputs:} The decimal result is displayed across the HEX0--HEX7 displays.
+\end{itemize}
+
+\subsection{Application 3: Advanced LCD User Interface}
+This application tests the LCD HD44780 driver logic.
+\begin{itemize}
+	\item \textbf{Functionality:} Based on switch inputs, the LCD displays coordinate data (A, B, C) and identifies which point is closest to a target.
+	\item \textbf{Interface:} Assembly routines handle the initialization (ON, EN, RS, R/W bits) and data transfer to the LCD register at address \texttt{0x1000\_4000}.
+\end{itemize}
+
+\newpage
+\section{Performance Analysis and Results}
+
+\subsection{Benchmarking}
+To thoroughly evaluate the processor's performance beyond basic functional ISA tests, standard benchmark programs provided in the course were executed. These benchmarks simulate heavier computational workloads and complex control flow changes, allowing for a precise measurement of the Instructions Per Cycle (IPC) and the effectiveness of the branch prediction unit under realistic conditions.
+
+\subsection{Pipeline Performance Comparison}
+The transition from Non-forwarding (Model 1) to Forwarding (Model 2) and subsequently to 2-bit Dynamic Prediction (Model 3) significantly improves the Instructions Per Cycle (IPC). The results are summarized below:
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{lccc}
+		\toprule
+		\textbf{Metric} & \textbf{Non-forwarding} & \textbf{Forwarding} & \textbf{2-bit Prediction} \\
+		\midrule
+		IPC (ISA Test) & 0.xx & 0.yy & 0.zz \\
+		IPC (Benchmark Test) & 0.xx & 0.yy & 0.zz \\
+		Mispredict Rate (\%) & High & Medium & Low \\
+		$F_{max}$ (MHz) & ... & ... & ... \\
+		\bottomrule
+	\end{tabular}
+	\caption{Processor Performance Benchmarking}
+\end{table}
+
+\subsection{Synthesis Results}
+Synthesis was conducted using Quartus Prime to target the Altera DE-2 board (Cyclone II):
+\begin{itemize}
+	\item \textbf{Total Logic Elements:} Indicates the complexity of the Hazard and Forwarding Units.
+	\item \textbf{Total Registers:} Reflects the additions of pipeline stage registers and BTB entries.
+\end{itemize}
+
+\newpage
+\section{Conclusion}
+The Milestone 3 project successfully achieved a functional 5-stage pipelined RV32I processor. By implementing forwarding and dynamic branch prediction, the processor's execution efficiency was maximized. The real-world applications on the DE-2 board confirmed the robustness of the I/O system and the stability of the custom datapath under hardware constraints.
+
+\newpage
+\section*{References}

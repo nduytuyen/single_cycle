@@ -1,0 +1,158 @@
+\ProvidesPackage{mystyle}[2025/08/21 Custom style]
+
+% ---- Colors ----
+\definecolor{keywordcolor}{rgb}{0.1,0.1,0.6}
+\definecolor{commentcolor}{rgb}{0.0,0.5,0.0}
+\definecolor{stringcolor}{rgb}{0.58,0,0.82}
+\definecolor{bgcolor}{rgb}{0.95,0.95,0.95}
+
+% ---- Verilog code style ----
+\lstdefinelanguage{Verilog}{
+    keywords={always,and,assign,begin,case,casex,casez,default,else,end,endcase,
+              endmodule,if,module,or,input,output,wire,reg,while,for,parameter,
+              localparam,generate,endgenerate,initial},
+    morecomment=[l]//,
+    morecomment=[s]{/*}{*/},
+    morestring=[b]",
+    sensitive=true
+}
+\lstdefinestyle{verilog-style}{
+    language=Verilog,
+    backgroundcolor=\color{bgcolor},
+    keywordstyle=\color{keywordcolor}\bfseries,
+    commentstyle=\color{commentcolor}\itshape,
+    stringstyle=\color{stringcolor},
+    basicstyle=\ttfamily\small,
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=5pt,
+    tabsize=2,
+    showstringspaces=false,
+    breaklines=true,
+    frame=single
+}
+\newcommand{\verilogcode}[1]{\lstinputlisting[style=verilog-style]{#1}}
+
+% ---- Fancy Header/Footer ----
+\fancypagestyle{fancy}{
+    \fancyhf{}
+    \fancyhead[L]{\texttt{Computer Architecture}}
+    \fancyhead[R]{\texttt{Supervisor: Assoc. Prof. Dr. Tran Hoang Linh}}
+    \fancyfoot[L]{\includegraphics[height=12pt]{figures/logo_DEE.png} 
+        \hspace{4pt} \textbf{Department of Electronics}}
+    \fancyfoot[R]{Page~\thepage}
+    \renewcommand{\headrulewidth}{0.4pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+}
+
+% =========================================================================
+% SAMPLE TEMPLATES (COMMENTED FOR YOUR USE)
+% =========================================================================
+
+
+
+
+
+
+% --------------------- Danh sách cơ bản với itemize ---------------------
+% \begin{itemize}
+	%     \item \textbf{Enumeration Methods}:
+	% \end{itemize}
+
+
+
+
+
+
+% --------------------- Tạo bảng ---------------------
+% \begin{table}[h!]
+	%     \centering
+	%     \begin{tabular}{|c|c|c|}
+		%         \hline
+		%         \textbf{Column 1} & \textbf{Column 2} & \textbf{Column 3} \\
+		%         \hline
+		%         Dữ liệu 1 & Dữ liệu 2 & Dữ liệu 3 \\
+		%         Dữ liệu 4 & Dữ liệu 5 & Dữ liệu 6 \\
+		%         \hline
+		%     \end{tabular}
+	%     \caption{Mô tả bảng của bạn} % Thay bằng mô tả thực tế
+	%     \label{tab:sample_table} % Nhãn để tham chiếu
+	% \end{table}
+
+
+
+
+
+
+% --------------------- Chèn code Verilog ---------------------
+% \begin{lstlisting}[style=verilog-style]
+	%     module ALU(input [3:0] A, B, output reg [3:0] S);
+	%         always @(*) begin
+	%             S = A + B;
+	%         end
+	%     endmodule
+	% \end{lstlisting}
+
+
+
+
+
+% --------------------- Chèn ảnh ---------------------
+% \begin{figure}[h!]
+	%     \centering
+	%     \includegraphics[width=1.0\linewidth]{figures/bia.jpg} 
+	%     \caption{Mô tả ảnh của bạn} % Thay bằng mô tả thực tế
+	%     \label{fig:sample_image} % Nhãn để tham chiếu
+	% \end{figure}
+
+
+
+
+
+% --------------------- Danh sách lồng nhau với itemize ---------------------
+% \begin{itemize}[label=\textbullet]
+	%     \item First level item
+	%     \begin{itemize}[label=--]
+		%         \item Second level item
+		%         \begin{itemize}[label=$\cdot$]
+			%             \item Third level item (equivalent to subsubsubsection)
+			%             \item Another third level item
+			%         \end{itemize}
+		%         \item Another second level item
+		%     \end{itemize}
+	%     \item Another first level item
+	% \end{itemize}
+
+
+
+
+
+% --------------------- Danh sách lồng nhau với enumerate (1), 2), 3)...) ---------------------
+% \begin{enumerate}[label=\arabic*)] % Cấp 1: 1), 2), 3)...
+	%     \item First level item
+	%     \begin{enumerate}[label=\arabic*.{\arabic*})] % Cấp 2: 1.1), 1.2), 1.3)...
+		%         \item Second level item
+		%         \begin{enumerate}[label=\arabic*.{\arabic*.{\arabic*}})] % Cấp 3: 1.1.1), 1.1.2), 1.1.3)...
+			%             \item Third level item (equivalent to subsubsubsection)
+			%             \item Another third level item
+			%         \end{enumerate}
+		%         \item Another second level item
+		%     \end{enumerate}
+	%     \item Another first level item
+	% \end{enumerate}
+	
+	
+	
+	
+	
+	
+% --------------------- Sample verbatim block ---------------------
+% \begin{verbatim}
+% git commit -m "Thêm module counter và fix alu.v"
+% \end{verbatim}
+
+
+% =========================================================================
+% END OF SAMPLE TEMPLATES
+% =========================================================================

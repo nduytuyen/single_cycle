@@ -1,0 +1,90 @@
+\documentclass[a4paper,12pt]{article}
+
+%------ LiBRARY Bổ Sung ---------
+\usepackage{enumitem}
+\usepackage{tabularx} % nhớ khai báo ở preamble
+\usepackage{float}
+
+% ----- ENCODING & LANGUAGE -----
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage{qrcode}
+% ----- GEOMETRY & SPACING -----
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+% ----- GRAPHICS & TABLES -----
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{ragged2e}
+
+% ----- MATH -----
+\usepackage{amsmath, amssymb}
+
+% ----- COLOR & CODE -----
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\input{mystyle.sty}   % chứa style, header/footer, code style
+
+% ----- HEADER & FOOTER -----
+\usepackage{fancyhdr}
+
+% ----- HYPERLINKS -----
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = true,
+    linkcolor  = blue,
+    urlcolor   = teal,
+    citecolor  = magenta
+}
+
+% ----- BACKGROUND -----
+\usepackage[pages=some]{background}
+\backgroundsetup{
+    scale=1,
+    color=black,
+    opacity=0.6,
+    angle=0,
+    contents={\includegraphics[scale=1.1]{figures/bia_cover.png}}
+}
+
+% ----- DOCUMENT START -----
+\begin{document}
+
+% --- Cover Page ---
+\pagestyle{empty}
+\include{sections/cover}
+\clearpage
+
+% --- Acknowledgements ---
+\pagestyle{plain}
+% ---- Số trang La Mã cho front matter ----
+\pagenumbering{roman}  % i, ii, iii ...
+\setcounter{page}{1}   % bắt đầu từ i
+%\include{sections/acknowledgement}
+
+% --- Table of contents ---
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
+
+% --- Main content ---
+\clearpage
+\pagestyle{fancy}
+\pagenumbering{arabic} % 1, 2, 3 ...
+\setcounter{page}{1}   % Chương 1 bắt đầu từ trang 1
+\include{sections/description}
+
+\end{document}
+

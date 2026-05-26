@@ -1,0 +1,5 @@
+\babel@toc {vietnamese}{}\relax 
+\beamer@sectionintoc {1}{Giới thiệu tổng quan}{3}{0}{1}
+\beamer@sectionintoc {2}{Giới thiệu tổng quan}{3}{0}{2}
+\beamer@sectionintoc {3}{Chiến lược thiết kế (Design Strategy)}{4}{0}{3}
+\beamer@sectionintoc {4}{Triển khai trên FPGA (Hardware Implementation)}{10}{0}{4}

@@ -1,0 +1,9 @@
+\babel@toc {english}{}\relax 
+\babel@toc {english}{}\relax 
+\contentsline {table}{\numberline {1}{\ignorespaces Signal Descriptions for the Vending Machine Module}}{1}{table.1}%
+\contentsline {table}{\numberline {2}{\ignorespaces Original FSM State Transition Table (13 States)}}{3}{table.2}%
+\contentsline {table}{\numberline {3}{\ignorespaces Optimized FSM State Transition Table (9 States)}}{3}{table.3}%
+\contentsline {table}{\numberline {4}{\ignorespaces Summary of Directed Test Scenarios}}{6}{table.4}%
+\contentsline {table}{\numberline {5}{\ignorespaces Directed Test Simulation Log Output (Partial)}}{7}{table.5}%
+\contentsline {table}{\numberline {6}{\ignorespaces Summary of Parameters and Results for the Random Test Phase}}{8}{table.6}%
+\contentsline {table}{\numberline {7}{\ignorespaces Constrained Random Test Simulation Log Output (Partial)}}{9}{table.7}%

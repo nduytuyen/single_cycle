@@ -63,7 +63,7 @@ module alu(
                        );
    //alu_op
     localparam [3:0] 
-   	                                           OP_ADD  = 4'b0000,
+   	                OP_ADD  = 4'b0000,
 					           OP_SUB  = 4'b0001,
 					           OP_SLT  = 4'b0010,
 					           OP_SLTU = 4'b0011,
